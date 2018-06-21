@@ -1,0 +1,61 @@
+<Doctype html><html><head><h1>TIMER</h1>
+<hr>
+<h2> Countdown </h2>
+
+<style>
+body {
+  background-color: #a3d5d3;
+}
+h1 {
+    color: black;
+    text-align: center;
+}
+h2 {
+    color: darkblue;
+    text-align: center;
+}
+
+
+</style>
+<script>
+document.getElementsByTagName("h1")[0].style.fontSize = "80px";
+function startTimer(duration, display) {
+    var tmr = duration, hrs, mns, scs;
+    myVar = setInterval(function () {
+        hrs = parseInt(tmr / 3600, 10)
+        mns = parseInt((tmr - hrs * 3600) /60, 10)
+        scs = parseInt(tmr % 60, 10);
+
+        hrs = hrs < 10 ? "0" + hrs : hrs;
+        mns = mns < 10 ? "0" + mns : mns;
+        scs = scs < 10 ? "0" + scs : scs;
+        display.textContent = hrs + ":" + mns + ":" + scs;
+				
+        if (--tmr < 0) {
+            myStopFunction();
+        }
+    }, 1000);
+    
+    function myStopFunction() {
+    clearInterval(myVar);
+    document.getElementById("message").textContent = "Countdown Completed!"
+}
+}
+function onClickFn() {
+    var duration = 3600 * parseInt(document.getElementById("startTimeHours").value) + 60 * parseInt(document.getElementById("startTimeMinutes").value);
+        display = document.querySelector('#time');
+    startTimer(duration, display);
+};
+</script>
+
+</head>
+ <body>
+<center>Enter Time: <input type="text" id="startTimeHours"> hours <input type="text" id="startTimeMinutes"> minutes </center><br>
+   
+   <center><button onclick="onClickFn()">Start Countdown</button></center>
+       <h1 style="text-align:center">       
+       <div><span id="time"></span></div>
+       <div><span id="message"></span></div>
+  </h1> 
+</body>
+</html>
